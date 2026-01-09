@@ -1,0 +1,5 @@
+.flex-row-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}

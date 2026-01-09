@@ -1,0 +1,66 @@
+<div class="card shadow-sm">
+  <div class="card-header text-center">
+    <h5 class="mb-0">Registrar persona</h5>
+  </div>
+
+  <div class="card-body">
+
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+
+    <form (ngSubmit)="insert()">
+
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="person.firstName"
+          name="firstName"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="person.surName"
+          name="surName"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Edad</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="person.age"
+          name="age"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Fecha de registro</label>
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="person.createdAt"
+          name="createdAt"
+        />
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">
+          Guardar
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

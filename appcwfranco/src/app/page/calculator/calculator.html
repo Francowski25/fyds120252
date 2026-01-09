@@ -1,0 +1,43 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="calc-card">
+
+    <h1>Calculadora</h1>
+
+    <div class="form-group mb-3">
+      <label for="num1">Número 1:</label>
+      <input
+        id="num1"
+        type="number"
+        class="form-control"
+        [value]="numberOne"
+        (input)="numberOne = $event.target.valueAsNumber || 0"
+      />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="num2">Número 2:</label>
+      <input
+        id="num2"
+        type="number"
+        class="form-control"
+        [value]="numberTwo"
+        (input)="numberTwo = $event.target.valueAsNumber || 0"
+      />
+    </div>
+
+    <button
+      class="btn w-100"
+      (click)="calcular()"
+    > Sumar
+    </button>
+
+    <div class="resultado mt-3" *ngIf="resultado !== null">
+      <strong>Resultado: {{ resultado | number }} </strong>
+    </div>
+
+    <div class="error mt-2" *ngIf="error">
+      {{ error }}
+    </div>
+
+  </div>
+</div>
