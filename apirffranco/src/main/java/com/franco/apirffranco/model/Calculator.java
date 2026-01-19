@@ -1,6 +1,6 @@
 package com.franco.apirffranco.model;
 
-public class NumerosDTO {
+public class Calculator {
     private int numberOne;
     private int numberTwo;
 

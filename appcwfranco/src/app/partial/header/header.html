@@ -1,0 +1,50 @@
+<header class="container border-bottom py-3 header">
+    <div class="d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <a routerLink="/home" class="text-decoration-none">
+                <span class="brand-text">
+                    Wos<span class="text-primary">ito</span>
+                </span>
+            </a>
+        </div>
+
+        <nav class="nav-menu" [class.active]="isMenuOpen">
+            <ul class="d-flex gap-4 mb-0 list-unstyled align-items-center">
+
+                <li>
+                    <a routerLink="/home" class="nav-link px-0" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
+                        Inicio
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/calculator" class="nav-link px-0" routerLinkActive="active" (click)="closeMenu()">
+                        Calculator
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/note" class="nav-link px-0" routerLinkActive="active" (click)="closeMenu()">
+                        Note
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/product" class="nav-link px-0" routerLinkActive="active" (click)="closeMenu()">
+                        Product
+                    </a>
+                </li>
+
+                <li>
+                    <button class="btn btn-outline-primary" (click)="logout()">
+                        Cerrar sesión
+                    </button>
+                </li>
+
+            </ul>
+        </nav>
+
+    </div>
+</header>

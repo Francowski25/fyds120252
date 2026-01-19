@@ -1,0 +1,24 @@
+.welcome-container {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 0.25rem;
+}
+
+.brand-accent {
+    color: #0d6efd;
+}
+
+.welcome-subtext {
+    font-size: 0.95rem;
+    color: #6c757d;
+}

@@ -1,42 +1,50 @@
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="calc-card">
+<div class="container d-flex justify-content-center align-items-center ">
+  <div class="calc-card shadow-sm">
 
-    <h1>Calculadora</h1>
+    <div class="calc-section">
+      <h5 class="calc-title text-center mb-4">
+        Calculadora
+      </h5>
 
-    <div class="form-group mb-3">
-      <label for="num1">Número 1:</label>
-      <input
-        id="num1"
-        type="number"
-        class="form-control"
-        [value]="numberOne"
-        (input)="numberOne = $event.target.valueAsNumber || 0"
-      />
+      <div class="form-group mb-3">
+        <label for="num1" class="form-label">Número 1</label>
+        <input id="num1" type="number" class="form-control modern-input" [(ngModel)]="numberOne" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="num2" class="form-label">Número 2</label>
+        <input id="num2" type="number" class="form-control modern-input" [(ngModel)]="numberTwo" />
+      </div>
+
+      <div class="resultado mt-3 text-center" *ngIf="resultado !== null">
+        <strong>Resultado: {{ resultado | number }}</strong>
+      </div>
+
+      <div class="error mt-2 text-center text-danger" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <div class="text-center mt-2" *ngIf="loading">
+        <small class="text-muted">Calculando…</small>
+      </div>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="num2">Número 2:</label>
-      <input
-        id="num2"
-        type="number"
-        class="form-control"
-        [value]="numberTwo"
-        (input)="numberTwo = $event.target.valueAsNumber || 0"
-      />
-    </div>
+    <div class="calc-actions">
+      <button class="btn btn-primary modern-btn" (click)="calcular('sumar')" [disabled]="loading">
+        Sumar
+      </button>
 
-    <button
-      class="btn w-100"
-      (click)="calcular()"
-    > Sumar
-    </button>
+      <button class="btn btn-outline-primary modern-btn" (click)="calcular('restar')" [disabled]="loading">
+        Restar
+      </button>
 
-    <div class="resultado mt-3" *ngIf="resultado !== null">
-      <strong>Resultado: {{ resultado | number }} </strong>
-    </div>
+      <button class="btn btn-outline-primary modern-btn" (click)="calcular('multiplicar')" [disabled]="loading">
+        Multiplicar
+      </button>
 
-    <div class="error mt-2" *ngIf="error">
-      {{ error }}
+      <button class="btn btn-outline-primary modern-btn" (click)="calcular('dividir')" [disabled]="loading">
+        Dividir
+      </button>
     </div>
 
   </div>

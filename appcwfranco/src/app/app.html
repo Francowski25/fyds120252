@@ -1,10 +1,24 @@
-<section class="container py-5">
-	<div class="row justify-content-center g-4">
-		<div class="col-md-6 col-lg-5">
-			<app-calculator></app-calculator>
+<div class="d-flex flex-column min-vh-100">
+
+	<!-- Menú solo si está logueado -->
+	<ng-container *ngIf="authService.isLoggedIn()">
+		<header class="sticky-top">
+			<app-header></app-header>
+		</header>
+	</ng-container>
+
+	<!-- Contenido principal siempre visible -->
+	<main class="flex-grow-1 container py-5">
+		<div class="row justify-content-center g-4">
+			<router-outlet></router-outlet>
 		</div>
-		<div class="col-md-6 col-lg-5">
-			<app-person-insert></app-person-insert>
-		</div>
-	</div>
-</section>
+	</main>
+
+	<!-- Footer opcional también condicionado -->
+	<ng-container *ngIf="authService.isLoggedIn()">
+		<footer class="mt-auto">
+			<!-- <app-footer></app-footer> -->
+		</footer>
+	</ng-container>
+
+</div>

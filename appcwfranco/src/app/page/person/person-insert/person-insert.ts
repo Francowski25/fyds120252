@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PersonService } from '../../../services/person.service';
-import { Persons } from '../../../models/person/person';
+import { Persons } from '../../../models/user/person';
 import { FormsModule } from '@angular/forms';
+import { Message } from '../../../models/message/message';
 
 @Component({
   selector: 'app-person-insert',
@@ -13,37 +14,39 @@ import { FormsModule } from '@angular/forms';
 })
 export class PersonInsert {
 
-  person: Persons = {
-    firstName: '',
-    surName: '',
-    age: 0,
-    createdAt: ''
-  };
+  person: Persons = { firstName: '', surName: '', dni: '' };
 
-  success = '';
-  error = '';
+  message: Message | null = null;
 
-  constructor(private personService: PersonService) {}
+  constructor(private personService: PersonService) { }
 
   insert() {
-    this.success = '';
-    this.error = '';
+
+    // 🔒 Validaciones frontend
+    if (!this.person.firstName || !this.person.surName || !this.person.dni) {
+      this.message = { type: 'error', text: 'Todos los campos son obligatorios' };
+      return;
+    }
+
+    if (!/^\d{8}$/.test(this.person.dni)) {
+      this.message = { type: 'error', text: 'El DNI debe tener 8 dígitos' };
+      return;
+    }
+
+    this.message = null;
 
     this.personService.insert(this.person).subscribe({
       next: () => {
-        this.success = 'Persona registrada correctamente';
-
-        this.person = {
-          firstName: '',
-          surName: '',
-          age: 0,
-          createdAt: ''
-        };
+        this.message = { type: 'success', text: 'Persona registrada correctamente' };
+        this.person = { firstName: '', surName: '', dni: '' };
       },
       error: () => {
-        this.error = 'Error al insertar persona';
+        this.message = { type: 'error', text: 'Error del servidor' };
       }
     });
+
+
   }
+
 }
 

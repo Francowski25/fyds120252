@@ -1,65 +1,38 @@
-<div class="card shadow-sm">
-  <div class="card-header text-center">
-    <h5 class="mb-0">Registrar persona</h5>
+<div class="card shadow-sm modern-card">
+  <div class="card-header text-center bg-white border-0 mt-2">
+    <h5 class="fw-semibold">Registrar persona</h5>
+    <p class="text-muted small">Complete los datos requeridos</p>
   </div>
 
-  <div class="card-body">
+  <div class="card-body px-4 pb-4">
 
-    <div *ngIf="success" class="alert alert-success">
-      {{ success }}
-    </div>
-
-    <div *ngIf="error" class="alert alert-danger">
-      {{ error }}
+    <div *ngIf="message" [ngClass]="{
+           'alert alert-success': message.type === 'success',
+           'alert alert-danger': message.type === 'warning' || message.type === 'error'
+         }" class="small">
+      {{ message.text }}
     </div>
 
     <form (ngSubmit)="insert()">
 
-      <div class="mb-3">
+      <div class="form-group mb-3">
         <label class="form-label">Nombre</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="person.firstName"
-          name="firstName"
-        />
+        <input type="text" class="form-control modern-input" [(ngModel)]="person.firstName" name="firstName" />
       </div>
 
-      <div class="mb-3">
+      <div class="form-group mb-3">
         <label class="form-label">Apellido</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="person.surName"
-          name="surName"
-        />
+        <input type="text" class="form-control modern-input" [(ngModel)]="person.surName" name="surName" />
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Edad</label>
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="person.age"
-          name="age"
-        />
+      <div class="form-group mb-3">
+        <label class="form-label">Dni</label>
+        <input type="text" class="form-control modern-input" [(ngModel)]="person.dni" name="dni" />
       </div>
 
-      <div class="mb-4">
-        <label class="form-label">Fecha de registro</label>
-        <input
-          type="date"
-          class="form-control"
-          [(ngModel)]="person.createdAt"
-          name="createdAt"
-        />
-      </div>
-
-      <div class="d-grid">
-        <button type="submit" class="btn btn-primary">
-          Guardar
-        </button>
-      </div>
+      <button type="submit" class="btn btn-primary">
+        Registrar
+      </button>
 
     </form>
   </div>

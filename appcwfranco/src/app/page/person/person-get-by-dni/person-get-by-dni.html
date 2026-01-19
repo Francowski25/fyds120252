@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h5 class="card-title mb-3">Buscar persona por DNI</h5>
+
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Ingrese DNI" maxlength="8" [(ngModel)]="dni"
+                    (keyup.enter)="buscarPorDni()" />
+
+                <button type="button" class="btn btn-primary" [disabled]="loading || !dni.trim()"
+                    (click)="buscarPorDni()">
+                    {{ loading ? 'Buscando…' : 'Buscar' }}
+                </button>
+            </div>
+
+            <div *ngIf="loading" class="text-muted mt-3">
+                Buscando persona…
+            </div>
+
+            <div *ngIf="errorMsg" class="alert alert-danger mt-3">
+                {{ errorMsg }}
+            </div>
+
+            <div *ngIf="person" class="alert alert-success mt-3">
+                <strong>Resultado:</strong><br>
+                Nombre: {{ person.firstName }}<br>
+                Apellido: {{ person.surName }}
+            </div>
+
+        </div>
+    </div>
+</div>

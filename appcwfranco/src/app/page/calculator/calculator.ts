@@ -3,35 +3,47 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalculatorService } from '../../services/calculator.service';
 
+type Operation = 'sumar' | 'restar' | 'multiplicar' | 'dividir';
+
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './calculator.html',
   styleUrl: './calculator.css',
 })
-
 export class Calculator {
-  numberOne = 0;
-  numberTwo = 0;
+  numberOne: number = 0;
+  numberTwo: number = 0;
 
   resultado: number | null = null;
-  error = '';
+  error: string = '';
+  loading: boolean = false;
 
-  constructor(private calculatorService: CalculatorService) {}
+  constructor(private calculatorService: CalculatorService) { }
 
-  calcular() {
-    this.error = '';
+  calcular(operation: Operation): void {
+    this.resetState();
 
-    this.calculatorService.sumar({
+    if (operation === 'dividir' && this.numberTwo === 0) {
+      this.error = 'No se puede dividir entre cero';
+      return;
+    }
+
+    this.loading = true;
+
+    this.calculatorService[operation]({
       numberOne: this.numberOne,
-      numberTwo: this.numberTwo
+      numberTwo: this.numberTwo,
     }).subscribe({
-      next: res => this.resultado = res,
-      error: () => this.error = 'Error al conectar con el servidor'
+      next: (res) => this.resultado = res,
+      error: () => this.error = 'Error al conectar con el servidor',
+      complete: () => this.loading = false,
     });
+  }
+
+  private resetState(): void {
+    this.error = '';
+    this.resultado = null;
   }
 }
